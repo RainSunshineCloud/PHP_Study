@@ -1,0 +1,12 @@
+{
+    "name": "qing/qr-code",
+    "authors": [
+        {
+            "name": "RainSunshineCloud",
+            "email": "931035553@qq.com"
+        }
+    ],
+    "require": {
+        "endroid/qrcode": "^3.2"
+    }
+}
