@@ -1,5 +1,13 @@
 <?php
 
+$str = request_resource('http://quan.meiquan8.com/index.php?mod=quan&act=index&iid=564489957966');
+$str = trim($str); //清除字符串两边的空格
+$str = preg_replace("/\s+/","",$str); 
+
+$preg = '/<divclass="ori-boxcell">(.*?)<\/p><\/div><divclass="ori-boxcell">/Us';
+preg_match_all($preg,$str,$arr);
+
+var_dump($arr);
 /**
  * @Author   RyanWu
  * @DateTime 2018-01-29
