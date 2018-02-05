@@ -1,0 +1,3 @@
+mac安装mysql时，由于无法删除pHp本身的环境，所以在安装时需要先保证brew是正确的，可以通过brew doctor 来保证。
+在安装过程中，可以参考https://github.com/Homebrew/homebrew-php/blob/master/README.md#common-upgrade-issues
+该文章里面说明了安装的步骤，其他扩展也可以以此安装
