@@ -1,9 +1,0 @@
-1.通过OAuthProvider提供服务，通过try catch捕获异常
-2.通过Oauth获取服务custom
-3.流程如下：
-a.用户向custom请求登陆服务提供者
-b.custom 发起 Oauth 请求服务提供者
-c.OAuthProvider 向用户发送验证界面
-d.用户验证
-e.OAuthProvider 向custom 提供服务。
-
