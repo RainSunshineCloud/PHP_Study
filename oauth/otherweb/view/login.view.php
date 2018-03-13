@@ -4,9 +4,8 @@
 <html>
 	<head></head>
 	<body>
-		<form action='./oauth.php' method='post'>
+		<form action='./oauth.php?action=Oauthorize&oauth_token='<?=$token?> method='post'>
 			<input name='username'>
-			<input type='hidden' name='token' value='<?= $token?>'>
 			<input type='password' name='pwd'>
 			<input type='submit'>
 		</form>

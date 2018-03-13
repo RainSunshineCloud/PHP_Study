@@ -7,7 +7,7 @@ interface Store
 
 	public function storeOAuthorizeToken($parm);
 
-	public function getRequestToken ($parm);
+	public function getRequestSecret ($parm);
 
 	public function getAccessToken ($parm);
 

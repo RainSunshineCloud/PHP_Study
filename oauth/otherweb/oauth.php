@@ -1,36 +1,14 @@
 <?php
+include './autoload.php';
 
-$arr = $_POST;
+if (isset($_GET['action'])&&$_GET['action'] !='login') {
+	var_dump($_GET);
+	new OAuthServer(new FileStore());
 
-unset($arr['oauth_signature']);
+}else {
 
-arsort($arr,SORT_STRING);
+	if ($_GET['action']== 'login') {
+		include './view/login.view.php';
+	}
 
-$str = '';
-foreach ($arr as $k=>$v) {
-	$str .= $k.'='.urlencode($v).'&';
 }
-$str = rtrim($str,'&');
-
-$method='POST';
-$url = urlencode('http://www.otherweb.com/oauth.php?action=request');
-$baseString = $method.'&'.$str;
-
-// $str = join($arr,'');
-// echo $str;
-var_dump(base64_encode(hash_hmac('sha1',$baseString,'7dfbb03a0e',true)));
-
-include_once './OAuthServer.class.php';
-include_once './Store.interface.php';
-include_once './FileStore.class.php';
-
-if (isset($_POST['token'])) {
-	$token = OAuthServer::checkRequestToken($_POST['token']);
-	header('Location:http://www.myweb.com/oauth.php?token='.$token);
-	exit;
-} 
-
-
-$file_store = new FileStore;
-
-new OAuthServer($file_store);
