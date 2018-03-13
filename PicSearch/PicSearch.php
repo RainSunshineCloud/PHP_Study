@@ -18,7 +18,10 @@ foreach ($file as $v) {
 		$sort[] = $v;
 	} 
 }
+$arr = [];
+for (){
 
+}
 var_dump($sort);
 
 
