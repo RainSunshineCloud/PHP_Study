@@ -1,4 +1,5 @@
 <?php
+
 //download属于下载资源，所以用get请求就可以了
 class Download
 {
