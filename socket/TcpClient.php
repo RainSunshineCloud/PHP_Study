@@ -1,4 +1,7 @@
 <?php
+
+include './TcpException.php';
+
 class TcpClient
 {
 	public static $serv_ip = '127.0.0.1';
@@ -7,7 +10,7 @@ class TcpClient
 	public static $recv_flags = MSG_WAITALL;
 	public static $send_flags = MSG_EOF;
 	protected static $socket = null;
-	public static $send_msg = "ssEOF;\r\n";
+	public static $send_msg = "kfjkdfdEOF;\n\r";
 
 	/**
 	 * 创建一个TcpClient
