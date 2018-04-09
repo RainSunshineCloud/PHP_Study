@@ -13,14 +13,14 @@ Observer::register(function (){
 		case -1:
 			break;
 		case 0:
-			echo 1;
 			posix_getpid();
-			TcpCommunicate::recv();
 			sleep(10);
+			echo TcpCommunicate::recv();
 			TcpCommunicate::send('dsfds');
 			TcpCommunicate::close();
-			exit;//记住子进程一定要杀掉，否则会出现多个子进程
+			TcpServer::$close_server = true;//关掉子进程的监听
 		default:
+			Observer::waitChildProcess();
 			break;
 	}
 

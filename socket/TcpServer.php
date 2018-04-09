@@ -28,10 +28,9 @@ class TcpServer
 		self::$listen_socket = socket_create(AF_INET,SOCK_STREAM,SOL_TCP);
 		socket_bind(self::$listen_socket,self::$serv_ip,self::$serv_port);
 		socket_listen(self::$listen_socket);
-		while(true) {
+		while(true) {	
 			self::$communicate_socket = socket_accept(self::$listen_socket);
 			Observer::acceptClient();
-			Observer::waitChildProcess();
 			if (self::$close_server === true) {
 				break;
 			}
