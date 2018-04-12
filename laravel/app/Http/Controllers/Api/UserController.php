@@ -1,28 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Models\User;
 
 class UserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
-     * Display a listing of the resource.
+     * 根据id获取用户信息
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        $user = $request->user();
-        echo $user['name'].'登录成功';
+    public static function getUserInfoById($id)
+    {    
+       return User::getUserInfoById((int)$id);
     }
 
     /**
