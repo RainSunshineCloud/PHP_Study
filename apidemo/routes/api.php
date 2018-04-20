@@ -18,3 +18,9 @@ Route::get('articles/{id}', 'ArticleController@show');
 Route::post('articles', 'ArticleController@store');
 Route::put('articles/{id}', 'ArticleController@update');
 Route::delete('articles/{id}', 'ArticleController@delete');
+Route::group([
+    'prefix'=>'/v1',
+    'middleware' => ['api']
+], function () {
+    Route::post('/user/login','Api\LoginController@login');
+});
