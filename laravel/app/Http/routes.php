@@ -11,8 +11,16 @@
 |
 */
 
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => '5',
+        'redirect_uri' => 'http://wwww.test2.com/index',
+        'response_type' => 'json',
+        'scope' => 'qF5nqnWSDeCWseYQ4yYK46dTwueVdwyBLF4IXHNK',
+    ]);
 
-Route::get('/','IndexController@index');
+    return redirect('http://www.test.com/oauth/authorize?'.$query);
+});
 
 
 

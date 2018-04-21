@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="\\192.168.218.128\www\checkout\OA" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/endroid/qrcode" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/symfony/inflector" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/composer" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/khanamiryan/qrcode-detector-decoder" />
+      <path value="$PROJECT_DIR$/QRCode/vendor/myclabs/php-enum" />
+    </include_path>
+  </component>
+</project>

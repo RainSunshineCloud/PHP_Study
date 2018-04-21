@@ -14,15 +14,7 @@ class ArticlesTableSeeder extends Seeder
     {
         // Let's truncate our existing records to start from scratch.
         Article::truncate();
+        factory(App\Article::class, 30)->create();
 
-        $faker = \Faker\Factory::create();
-
-        // And now, let's create a few articles in our database:
-        for ($i = 0; $i < 50; $i++) {
-            Article::create([
-                'title' => $faker->sentence,
-                'body' => $faker->paragraph,
-            ]);
-        }
     }
 }
