@@ -1,74 +1,79 @@
 <?php
-
-$str = request_resource('http://quan.meiquan8.com/index.php?mod=quan&act=index&iid=564489957966');
-$str = trim($str); //清除字符串两边的空格
-$str = preg_replace("/\s+/","",$str); 
-
-$preg = '/<divclass="ori-boxcell">(.*?)<\/p><\/div><divclass="ori-boxcell">/Us';
-preg_match_all($preg,$str,$arr);
-
+$error = [];
+$arr = json_decode(getUrl('http://localhost/1.php',['my'=>'mysql'],true,'post',$error),true);
+var_dump($error);
 var_dump($arr);
-/**
- * @Author   RyanWu
- * @DateTime 2018-01-29
- * @param    string     $url       请求地址
- * @param    array      $field     请求参数
- * @param    string     $method    请求方法 ，现只用put,get,post,delete
- * @param    array      &$error    错误信息
- * @param    boolean    $isDisplay 是否直接输出显示
- * @return   mix                   请求返回信息
- */
-function request_resource ($url,array $field =[],$method='get',array &$error=[],$isDisplay=false)
+
+function getUrl(string $url, array $field =[], bool $isReturn = true, $method = 'get', array &$error=[])
 {
 	//初始化
-	if ( !$ch = curl_init($url) ) {
-
-		$error = [
-			'errMsg'=>curl_error($ch),
-			'errorNo'=>curl_errno($ch),
+	if (! $ch = curl_init($url) ) {
+	 	$error = [
+			'number'=>curl_errno($ch),
+			'msg'=>'初始化失败',
 		];
-
 		return false;
 	}
 
-	//若为https请求，关闭对等证书验证
-	if (stripos($url,'https://') === 0 ) {
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	$opt = [];//设置参数
+	
+	//是否直接显示
+	if (! in_array($isReturn,[true,false],true)) {
+		$error = [
+			'number'=>100,
+			'msg'=>'是否直接显示（isReturn）只能填写true 或者 false',
+		];
+		return false;
 	}
 
 	//请求方式
-	$method = strtoupper((string)$method);
-		if (! in_array($method,['PUT','GET','POST','DELETE'])) {
-			$error = [
-			'errMsg'=>'请求方式只能是PUT,GET,POST,DELETE里面的一种',
-			'errorNo'=>100,
-		];
-
-		return false;
-		}
-    $opt[CURLOPT_CUSTOMREQUEST] = $method;
-
-		//是否显示
-		if ($isDisplay === false) {
-			$opt[CURLOPT_RETURNTRANSFER] = true;
-		} 
-
-		//传参
-		$opt[CURLOPT_POSTFIELDS] = json_encode($field);
-
-		//执行
-    curl_setopt_array($ch,$opt);
-    $res = curl_exec($ch);
-		if ( $res === false ) {
-			$error = [
-			'errMsg'=>curl_error($ch),
-			'errorNo'=>curl_errno($ch),
+	$method = strtoupper($method);
+	if (! in_array($method,['GET','POST','DELETE','PUT'])) {
+		$error = [
+			'number'=>'101',
+			'msg'=>'请求方法只能是以下四种：get,post,delete,put',
 		];
 		return false;
-		}
-		curl_close($ch);
-		return $res; 
+	}
+	
+	//判断是否有用户名和密码
+	if (isset($field['pwd']) && isset($field['user'])) {//验证用户名和密码
 
+		$opt[CURLOPT_USERPWD] = $field['user'].':'.$field['pwd'];
+		unset($field['user']);
+		unset($field['pwd']);
+
+	} else if (isset($field['user'])) {//验证使用中的密码
+
+		$opt[CURLOPT_USERNAME] = $field['user'];
+		unset($field['user']);
+
+	} else if ( isset($field['pwd']) ) {//仅仅设置密码
+
+		$error = [
+			'number' => '102',
+			'msg'=>'密码验证时用户名不能为空'
+		];
+		return false;
+
+	}
+
+	$opt[CURLOPT_RETURNTRANSFER] = $isReturn;
+	$opt[CURLOPT_CUSTOMREQUEST] = $method;
+	$opt[CURLOPT_POSTFIELDS] = http_build_query($field);
+	curl_setopt_array($ch,$opt);
+	//执行
+	$res = curl_exec($ch);
+
+	if ($res === false) {
+		$error = [
+			'number'=>curl_errno($ch),
+			'msg'=>curl_error($ch),
+		];
+		return false;
+
+	}
+	//关闭资源
+	curl_close($ch);
+	return $res;
 }
-
-
