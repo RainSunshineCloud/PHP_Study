@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+//后台
+Route::get('admin/login', 'Admin\LoginController@index');
+Route::namespace('Admin')->middleware('auth:admin')->prefix('admin')->group(function () {
+    Route::get('/','ArticalController@index')->name('admin_index');
+});
