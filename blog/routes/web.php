@@ -11,18 +11,16 @@
 |
 */
 
+
 Route::get('/', function() {
     return view('pusher');
 });
 Route::get('/test', function() {
-    $pusher = app('pusher');
 
-    $pusher->trigger( 'my-channel',
-        'my-event',
-        ['message' => 'I Love China!!!']
-    );
 
 });
+
+Route::get('/notify',"HomeController@index");
 
 
 Auth::routes();
