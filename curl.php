@@ -1,4 +1,6 @@
 <?php
+
+
 $error = [];
 $arr = json_decode(getUrl('http://localhost/1.php',['my'=>'mysql'],true,'post',$error),true);
 var_dump($error);

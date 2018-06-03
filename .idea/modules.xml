@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:$PROJECT_DIR$/../../../..//$PROJECT_DIR$/.idea/git.iml" filepath="$PROJECT_DIR$/.idea/git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PHP_Study.iml" filepath="$PROJECT_DIR$/.idea/PHP_Study.iml" />
+      <module fileurl="file://file:/data/..///data/app/git/PHP_Study/.idea/git.iml" filepath="file:$PROJECT_DIR$/../../../..///data/app/git/PHP_Study/.idea/git.iml" />
     </modules>
   </component>
 </project>

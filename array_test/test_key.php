@@ -3,5 +3,13 @@
 $arr = [1,2,3];
 echo key($arr);
 foreach($arr as $v){
+    $arr = new Pdo();
+    $arr->getAttribute();
 }
 echo key($arr);
+
+
+function getAttribute ()
+{
+
+}
